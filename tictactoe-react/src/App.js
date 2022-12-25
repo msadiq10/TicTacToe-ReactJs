@@ -6,6 +6,7 @@ function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xPlayer, setXPlayer] = useState(true);
   const [score, setScore] = useState({x: 0, o: 0})
+  const [gameOver, setGameOver] = useState(false);
 
   const WINNER = [
     [0,1,2],
@@ -50,15 +51,22 @@ function App() {
     for(let i = 0; i < WINNER.length; i++){
       const [x, y, z] = WINNER[i];
 
-      if (board[x] && board[x] === board[y] && board[y] === board[z])
+      if (board[x] && board[x] === board[y] && board[y] === board[z]){
+        setGameOver(true);
         return board[x];
+      }
     }
+  }
+
+  const reset = () => {
+    setGameOver(false);
+    setBoard(Array(9).fill(null))
   }
 
   return (
     <div className="App">
       <Score score={score} xPlayer={xPlayer}/>
-      <Board board={board} onClick={handleBoxClick}/>
+      <Board board={board} onClick={gameOver ? reset : handleBoxClick}/>
     </div>
   );
 }
