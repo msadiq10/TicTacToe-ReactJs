@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Board} from "./components/Board"
 import {Score} from "./components/Score"
+import {Reset} from "./components/Reset"
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xPlayer, setXPlayer] = useState(true);
@@ -67,6 +68,7 @@ function App() {
     <div className="App">
       <Score score={score} xPlayer={xPlayer}/>
       <Board board={board} onClick={gameOver ? reset : handleBoxClick}/>
+      <Reset reset={reset}/>
     </div>
   );
 }
